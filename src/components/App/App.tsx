@@ -49,8 +49,8 @@ export default function App() {
           Create note +
         </button>
       </header>
-      {!isLoading && data?.results && data.results.length > 0 && (
-        <NoteList notes={data.results} />
+      {!isLoading && data?.notes && data.notes.length > 0 && (
+        <NoteList notes={data.notes} />
       )}
       {isLoading && <p>Loading...</p>}
       {error && <p>Error loading notes</p>}

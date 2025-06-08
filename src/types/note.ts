@@ -12,6 +12,6 @@ export interface NewNoteData {
 }
 
 export interface NoteResponse {
-  results: Note[];
+  notes: Note[];
   totalPages: number;
 }
