@@ -1,13 +1,13 @@
 export interface Note {
   id: string;
   title: string;
-  comment: string;
+  content: string;
   tag: string;
 }
 
 export interface NewNoteData {
   title: string;
-  comment: string;
+  content: string;
   tag: string;
 }
 

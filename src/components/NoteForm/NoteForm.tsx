@@ -4,6 +4,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { createNote } from "../../services/noteService";
 import type { Note, NewNoteData } from "../../types/note";
+import { toast } from "react-toastify";
+
 interface NoteFormProps {
   onClose: () => void;
 }
@@ -36,11 +38,13 @@ export const NoteForm = ({ onClose }: NoteFormProps) => {
         try {
           await mutation.mutateAsync({
             title: values.title,
-            comment: values.content,
+            content: values.content,
             tag: values.tag,
           });
+          toast.success("The Note was successfully created!");
         } catch (error) {
           console.log(error);
+          toast.error("An Error while creating your Note");
         } finally {
           setSubmitting(false);
         }

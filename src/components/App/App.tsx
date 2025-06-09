@@ -8,6 +8,10 @@ import type { NoteResponse } from "../../types/note";
 import Modal from "../NoteModal/NoteModal";
 import { NoteForm } from "../NoteForm/NoteForm";
 import SearchBox from "../SearchBox/SearchBox";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,13 +56,14 @@ export default function App() {
       {!isLoading && data?.notes && data.notes.length > 0 && (
         <NoteList notes={data.notes} />
       )}
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error loading notes</p>}
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
       {isModalOpen && (
         <Modal onClose={closeModal}>
           <NoteForm onClose={closeModal} />
         </Modal>
       )}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }
