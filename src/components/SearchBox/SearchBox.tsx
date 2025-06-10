@@ -3,12 +3,15 @@ import css from "./SearchBox.module.css";
 import { useDebounce } from "use-debounce";
 
 interface SearchBoxProps {
-  value: string;
+  initialValue?: string;
   onSearch: (value: string) => void;
 }
 
-export default function SearchBox({ value, onSearch }: SearchBoxProps) {
-  const [inputValue, setInputValue] = useState(value);
+export default function SearchBox({
+  initialValue = "",
+  onSearch,
+}: SearchBoxProps) {
+  const [inputValue, setInputValue] = useState(initialValue);
   const [debouncedValue] = useDebounce(inputValue, 500);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export default function SearchBox({ value, onSearch }: SearchBoxProps) {
       type="text"
       placeholder="Search notes"
       onChange={handleChange}
-      value={value}
+      value={inputValue}
     />
   );
 }

@@ -7,7 +7,7 @@ axios.defaults.headers.common.Authorization = `Bearer ${
 }`;
 
 export const fetchNotes = async (
-  searchQuery?: string,
+  searchQuery: string,
   page: number = 1,
   perPage: number = 12
 ): Promise<NoteResponse> => {
@@ -15,7 +15,8 @@ export const fetchNotes = async (
     page,
     perPage,
   };
-  if (searchQuery && searchQuery.trim() !== "") {
+
+  if (searchQuery.trim()) {
     params.search = searchQuery.trim();
   }
 
@@ -27,10 +28,8 @@ export const createNote = async (noteData: NewNoteData): Promise<Note> => {
   const res = await axios.post<Note>("/notes", noteData);
   return res.data;
 };
-export const deleteNote: (
-  noteId: string
-) => Promise<{ message: string }> = async (
-  noteId: string
+export const deleteNote = async (
+  noteId: number
 ): Promise<{ message: string }> => {
   const res = await axios.delete<{ message: string }>(`/notes/${noteId}`);
   return res.data;

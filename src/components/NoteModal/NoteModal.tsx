@@ -1,11 +1,11 @@
 import css from "./NoteModal.module.css";
 import { createPortal } from "react-dom";
 import type React from "react";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 
-interface ModalProps {
+interface NoteModalProps {
   onClose: () => void;
-  children?: React.ReactNode;
+  children: ReactNode;
 }
 
 const modalRoot = document.querySelector("#modal-root")!;
@@ -15,7 +15,7 @@ if (!modalRoot) {
   );
 }
 
-export default function Modal({ onClose, children }: ModalProps) {
+export default function NoteModal({ onClose, children }: NoteModalProps) {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -45,6 +45,6 @@ export default function Modal({ onClose, children }: ModalProps) {
     >
       <div className={css.modal}>{children}</div>
     </div>,
-    modalRoot
+    document.body
   );
 }
