@@ -4,7 +4,6 @@ import css from "./App.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNotes } from "../../services/noteService";
 import Pagination from "../Pagination/Pagination";
-import { NoteForm } from "../NoteForm/NoteForm";
 import SearchBox from "../SearchBox/SearchBox";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +32,7 @@ export default function App() {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox initialValue={searchQuery} onSearch={setSearchQuery} />
+        <SearchBox value={searchQuery} onChange={setSearchQuery} />
         {data && data.totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
@@ -49,11 +48,8 @@ export default function App() {
       {data?.notes && data.notes.length > 0 && <NoteList notes={data.notes} />}
       {isLoading && isFetching && <Loader />}
       {error && <ErrorMessage />}
-      {isModalOpen && (
-        <NoteModal onClose={closeModal}>
-          <NoteForm onClose={closeModal} />
-        </NoteModal>
-      )}
+      {isModalOpen && <NoteModal onClose={closeModal} />}
+
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
