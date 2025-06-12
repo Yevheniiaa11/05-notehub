@@ -23,6 +23,15 @@ export default function App() {
 
   const trimmedSearch = debouncedSearch.trim();
 
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   const { data, isLoading, error, isFetching } = useQuery({
     queryKey: ["notes", trimmedSearch, currentPage],
     queryFn: () => fetchNotes(trimmedSearch, currentPage),
@@ -32,12 +41,12 @@ export default function App() {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox value={searchQuery} onChange={setSearchQuery} />
+        <SearchBox value={searchQuery} onChange={handleSearchChange} />
         {data && data.totalPages > 1 && (
           <Pagination
             currentPage={currentPage}
             totalPages={data.totalPages}
-            onPageChange={setCurrentPage}
+            onPageChange={handlePageChange}
           />
         )}
 

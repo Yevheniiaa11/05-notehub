@@ -20,7 +20,7 @@ export const fetchNotes = async (
     params.search = searchQuery.trim();
   }
 
-  const res = await axios.get("/notes", { params });
+  const res = await axios.get<NoteResponse>("/notes", { params });
   return res.data;
 };
 

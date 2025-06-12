@@ -8,13 +8,6 @@ interface NoteModalProps {
   onClose: () => void;
 }
 
-const modalRoot = document.querySelector("#modal-root")!;
-if (!modalRoot) {
-  throw new Error(
-    "Modal root element not found. Please add <div id='modal-root'></div> to index.html."
-  );
-}
-
 export default function NoteModal({ onClose }: NoteModalProps) {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
